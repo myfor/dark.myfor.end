@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Dark_MyFor\\Dark_MyFor\\Dark_MyFor.csproj": {}
+    "D:\\Projects\\dark.myfor.end\\src\\Dark_MyFor\\Dark_MyFor\\Dark_MyFor.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\Dark_MyFor\\Dark_MyFor\\Dark_MyFor.csproj": {
+    "D:\\Projects\\dark.myfor.end\\src\\Dark_MyFor\\Dark_MyFor\\Dark_MyFor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Dark_MyFor\\Dark_MyFor\\Dark_MyFor.csproj",
+        "projectUniqueName": "D:\\Projects\\dark.myfor.end\\src\\Dark_MyFor\\Dark_MyFor\\Dark_MyFor.csproj",
         "projectName": "Dark_MyFor",
-        "projectPath": "D:\\Projects\\Dark_MyFor\\Dark_MyFor\\Dark_MyFor.csproj",
+        "projectPath": "D:\\Projects\\dark.myfor.end\\src\\Dark_MyFor\\Dark_MyFor\\Dark_MyFor.csproj",
         "packagesPath": "C:\\Users\\biren\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Dark_MyFor\\Dark_MyFor\\obj\\",
+        "outputPath": "D:\\Projects\\dark.myfor.end\\src\\Dark_MyFor\\Dark_MyFor\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
