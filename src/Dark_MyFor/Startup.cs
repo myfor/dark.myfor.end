@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace Dark_MyFor
 {
@@ -25,6 +29,11 @@ namespace Dark_MyFor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DB.DarkContext>(options => 
+            {
+                options.UseMySql(Configuration.GetConnectionString("dark-maria"));
+            });
+
             services.AddControllers();
         }
 
@@ -37,6 +46,15 @@ namespace Dark_MyFor
             }
 
             app.UseHttpsRedirection();
+
+            app.UseRewriter(new RewriteOptions().AddRewrite("^$", "/index.html", true));
+
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory() + "/files/"),
+                RequestPath = "/files"
+            });
 
             app.UseRouting();
 

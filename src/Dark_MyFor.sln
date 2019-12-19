@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dark_MyFor", "Dark_MyFor\Dark_MyFor.csproj", "{C0FC6A16-54EC-4CAB-BF08-FB791598CBA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dark_MyFor", "Dark_MyFor\Dark_MyFor.csproj", "{C0FC6A16-54EC-4CAB-BF08-FB791598CBA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
