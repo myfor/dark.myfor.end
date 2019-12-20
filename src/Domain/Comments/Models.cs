@@ -5,8 +5,9 @@ namespace Domain.Comments
 {
     public class Models
     {
-        public class NewCommentInfo
+        public struct NewCommentInfo
         {
+            public int PostId { get; set; }
             public string NickName { get; set; }
             public string Content { get; set; }
             public List<IFormFile> Images { get; set; }

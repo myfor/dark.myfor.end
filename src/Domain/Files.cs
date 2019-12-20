@@ -1,5 +1,6 @@
 ﻿using Common;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -99,6 +100,22 @@ namespace Domain
                     continue;
                 list.Add(f);
             }
+            return list;
+        }
+
+        /// <summary>
+        /// 获取图片的路径, 缩略图和原图
+        /// </summary>
+        /// <returns></returns>
+        public static List<Share.Image> GetImagesPath(IList<int> ids)
+        {
+            List<Share.Image> list = new List<Share.Image>(ids.Count());
+
+            foreach (int id in ids)
+            {
+                list.Add(GetImagePath(id));
+            }
+
             return list;
         }
 
@@ -252,6 +269,29 @@ namespace Domain
             FrameDimension ImgFrmDim = new FrameDimension(gif.FrameDimensionsList[0]);
             gif.SelectActiveFrame(ImgFrmDim, 0);
             gif.Save(saveFullPath, ImageFormat.Png);
+        }
+
+        /// <summary>
+        /// 获取一张图片的缩略图路径和原图路径
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Share.Image GetImagePath(int id)
+        {
+            using var db = new DB.DarkContext();
+            DB.Tables.File file = db.Files.AsNoTracking()
+                                          .FirstOrDefault(f => f.Id == id);
+            Share.Image image = new Share.Image
+            { 
+                Thumbnail = "",
+                Path = ""
+            };
+
+            if (file is null)
+                return image;
+            image.Thumbnail = file.Thumbnail;
+            image.Path = file.Path;
+            return image;
         }
     }
 }
