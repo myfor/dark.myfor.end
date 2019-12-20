@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dark_MyFor.Services
 {
@@ -33,7 +34,7 @@ namespace Dark_MyFor.Services
                             continue;
 
                         //  clear DB
-
+                        ClearAllData();
 
                         isCleared = true;
                     }
@@ -46,6 +47,14 @@ namespace Dark_MyFor.Services
             });
 
             return Task.CompletedTask;
+        }
+
+        private void ClearAllData()
+        {
+            using var db = new DB.DarkContext();
+            db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(db.Comments)}");
+            db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(db.Posts)}");
+            db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(db.Files)}");
         }
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;

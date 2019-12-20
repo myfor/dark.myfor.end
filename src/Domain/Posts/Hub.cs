@@ -31,16 +31,16 @@ namespace Domain.Posts
                                            NickName = p.Creator,
                                            Content = p.Content,
                                            Date = p.CreateDate.ToString("HH:mm"),
-                                           Comments = p.Comments.OrderByDescending(c => c.CreateDate)
-                                                                .Take(5)
-                                                                .Select(c => new Comments.Results.CommentItem
-                                                                {
-                                                                    NickName = c.Creator,
-                                                                    Content = c.Content,
-                                                                    Date = c.CreateDate.ToString("HH:mm"),
-                                                                    Images = Files.GetImagesPath(c.Images.SplitToInt(','))
-                                                                })
-                                                                .ToList(),
+                                           //Comments = p.Comments == null ? new List<Comments.Results.CommentItem>() : p.Comments.OrderByDescending(c => c.CreateDate)
+                                           //                     .Take(5)
+                                           //                     .Select(c => new Comments.Results.CommentItem
+                                           //                     {
+                                           //                         NickName = c.Creator,
+                                           //                         Content = c.Content,
+                                           //                         Date = c.CreateDate.ToString("HH:mm"),
+                                           //                         Images = Files.GetImagesPath(c.Images.SplitToInt(','))
+                                           //                     })
+                                           //                     .ToList(),
                                            Images = Files.GetImagesPath(p.Images.SplitToInt(','))
                                        })
                                        .ToListAsync();
