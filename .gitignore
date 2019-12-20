@@ -3,3 +3,4 @@ obj/
 wwwroot/
 .vs/
 .vscode/
+Migrations/
