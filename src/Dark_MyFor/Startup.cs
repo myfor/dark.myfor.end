@@ -32,6 +32,9 @@ namespace Dark_MyFor
         {
             services.AddDbContext<DB.DarkContext>();
 
+            //  清理数据库的定时器
+            services.AddHostedService<Services.ClearDBTimer>();
+
             services.AddControllers();
         }
 
