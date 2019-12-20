@@ -22,6 +22,7 @@ namespace Dark_MyFor
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Common.Config.SetConfiguration(Configuration);
         }
 
         public IConfiguration Configuration { get; }
@@ -29,10 +30,7 @@ namespace Dark_MyFor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DB.DarkContext>(options => 
-            {
-                options.UseMySql(Configuration.GetConnectionString("dark-maria"));
-            });
+            services.AddDbContext<DB.DarkContext>();
 
             services.AddControllers();
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Dark_MyFor.DB
+namespace DB
 {
     public class Entity
     {
@@ -9,10 +9,8 @@ namespace Dark_MyFor.DB
         [Required]
         public int State { get; set; } = 1;
         [Required]
-        public int CreateById { get; set; } = 0;
+        public string Creator { get; set; } = "";
         [Required]
         public DateTimeOffset CreateDate { get; set; } = DateTimeOffset.Now;
-        public int? ModifyById { get; set; } = default;
-        public DateTimeOffset? ModifyDate { get; set; } = default;
     }
 }
