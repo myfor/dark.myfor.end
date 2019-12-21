@@ -33,7 +33,7 @@ namespace Domain.Posts
                                            Content = p.Content,
                                            Date = p.CreateDate.ToStandardTimeString(),
                                            Comments = commentHub.GetComments(p.Id, 1, 5),
-                                           Images = Files.GetImagesPath(p.Images.SplitToInt(','))
+                                           Images = File.GetImagesPath(p.Images.SplitToInt(','))
                                        })
                                        .ToListAsync();
             return Resp.Success(pager, "");
@@ -45,8 +45,7 @@ namespace Domain.Posts
             if (!isValid)
                 return Resp.Fault(Resp.NONE, msg);
 
-            Files file = new Files();
-            List<DB.Tables.File> files = await file.SaveImagesAsync(info.Images);
+            List<File> files = await File.SaveImagesAsync(info.Images);
 
             DB.Tables.Post newPost = new DB.Tables.Post
             {

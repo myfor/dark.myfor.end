@@ -36,7 +36,7 @@ namespace Domain.Comments
                                               NickName = c.Creator,
                                               Content = c.Content,
                                               Date = c.CreateDate.ToStandardTimeString(),
-                                              Images = Files.GetImagesPath(c.Images.SplitToInt(','))
+                                              Images = File.GetImagesPath(c.Images.SplitToInt(','))
                                           })
                                           .ToList();
         }
@@ -47,8 +47,7 @@ namespace Domain.Comments
             if (!isValid)
                 return Resp.Fault(Resp.NONE, msg);
 
-            Files file = new Files();
-            List<DB.Tables.File> files = await file.SaveImagesAsync(info.Images);
+            List<File> files = await File.SaveImagesAsync(info.Images);
 
             DB.Tables.Comment newComment = new DB.Tables.Comment
             {

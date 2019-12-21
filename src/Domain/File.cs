@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class Files
+    public class File
     {
         /// <summary>
         /// 没有文件, 使用 0 是因为方便存数据库
@@ -89,9 +89,46 @@ namespace Domain
             }
         }
 
-        public async Task<List<DB.Tables.File>> SaveImagesAsync(List<IFormFile> files)
+        /// <summary>
+        /// ID
+        /// </summary>
+        public int Id { get; }
+        /// <summary>
+        /// 文件名
+        /// </summary>
+        public string Name { get; }
+        /// <summary>
+        /// 扩展名
+        /// </summary>
+        public string ExtensionName { get; }
+        /// <summary>
+        /// 文件大小
+        /// </summary>
+        public long Size { get; }
+        /// <summary>
+        /// 原图路径
+        /// </summary>
+        public string SourcePath { get; }
+        /// <summary>
+        /// 缩略图路径
+        /// </summary>
+        public string ThumbnailPath { get; }
+        public File(DB.Tables.File file)
         {
-            List<DB.Tables.File> list = new List<DB.Tables.File>(files?.Count() ?? 0);
+            if (file is null)
+                throw new ArgumentNullException();
+
+            Id = file.Id;
+            Name = file.Name;
+            ExtensionName = file.ExtensionName;
+            Size = file.Size;
+            SourcePath = file.Path;
+            ThumbnailPath = file.Thumbnail;
+        }
+
+        public static async Task<List<File>> SaveImagesAsync(List<IFormFile> files)
+        {
+            List<File> list = new List<File>(files?.Count() ?? 0);
 
             foreach (IFormFile file in files)
             {
@@ -124,7 +161,7 @@ namespace Domain
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        private async Task<DB.Tables.File> SaveImageAsync(IFormFile file)
+        private static async Task<File> SaveImageAsync(IFormFile file)
         {
             /*
              * 保存图片到数据库, 同时保存图片的缩略图
@@ -197,7 +234,7 @@ namespace Domain
             if (!string.IsNullOrWhiteSpace(coverTempPath))
                 System.IO.File.Delete(coverTempPath);
             if (suc == 1)
-                return fileModel;
+                return new File(fileModel);
             return null;
         }
 
@@ -208,7 +245,7 @@ namespace Domain
         /// <param name="fileSavePath">缩略图保存路径</param>
         /// <param name="thumbnailWidth">缩略图宽</param>
         /// <param name="thumbnailHeight">缩略图高</param>
-        public Task MakeThumbnail(string sourcePath, string fileSavePath, double thumbnailWidth = THUMBNAIL_WIDTH, double thumbnailHeight = THUMBNAIL_HEIGHT)
+        public static Task MakeThumbnail(string sourcePath, string fileSavePath, double thumbnailWidth = THUMBNAIL_WIDTH, double thumbnailHeight = THUMBNAIL_HEIGHT)
         {
             return Task.Run(() =>
             {
@@ -263,7 +300,7 @@ namespace Domain
         /// </summary>
         /// <param name="sourceFileFullPath"></param>
         /// <param name="saveFullPath"></param>
-        public void GetGIFCover(string sourceFile, string saveFullPath)
+        public static void GetGIFCover(string sourceFile, string saveFullPath)
         {
             using Image gif = Image.FromFile(sourceFile, true);
             FrameDimension ImgFrmDim = new FrameDimension(gif.FrameDimensionsList[0]);
