@@ -46,6 +46,8 @@ namespace Dark_MyFor
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseMiddleware<Middleware.VisitLimit>();
+
             app.UseHttpsRedirection();
 
             app.UseRewriter(new RewriteOptions().AddRewrite("^$", "/index.html", true));
