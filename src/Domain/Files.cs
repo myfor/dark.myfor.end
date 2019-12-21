@@ -91,7 +91,7 @@ namespace Domain
 
         public async Task<List<DB.Tables.File>> SaveImagesAsync(List<IFormFile> files)
         {
-            List<DB.Tables.File> list = new List<DB.Tables.File>(files.Count());
+            List<DB.Tables.File> list = new List<DB.Tables.File>(files?.Count() ?? 0);
 
             foreach (IFormFile file in files)
             {

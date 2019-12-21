@@ -4,4 +4,4 @@ wwwroot/
 .vs/
 .vscode/
 Migrations/
-files/
+/src/Dark_MyFor/files/*

@@ -1,7 +1,9 @@
 ﻿using Dark_MyFor.Share;
 using Domain;
 using Domain.Posts;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Dark_MyFor.Controllers
@@ -27,6 +29,9 @@ namespace Dark_MyFor.Controllers
         [HttpPost]
         public async Task<ActionResult> NewPostsAsync([FromForm]Models.NewPostInfo info)
         {
+            if (info.Images is null)
+                info.Images = new List<IFormFile>();
+
             Hub hub = new Hub();
             Resp r = await hub.NewPostsAsync(info);
 
