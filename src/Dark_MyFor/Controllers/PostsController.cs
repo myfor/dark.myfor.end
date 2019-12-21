@@ -11,11 +11,13 @@ namespace Dark_MyFor.Controllers
     [Route("api/[controller]")]
     public class PostsController : DarkBaseController
     {
+#if DEBUG
         [HttpGet("test")]
         public ActionResult Test()
         {
             return Ok("OK");
         }
+#endif
 
         [HttpGet]
         public async Task<ActionResult> GetLiseAsync(int index, int rows)

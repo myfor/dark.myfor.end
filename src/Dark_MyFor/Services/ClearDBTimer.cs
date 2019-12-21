@@ -5,14 +5,11 @@
  * 将在早上 6 点清理数据库
  * 
  */
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
 
 namespace Dark_MyFor.Services
 {
