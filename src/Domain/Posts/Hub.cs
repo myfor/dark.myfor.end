@@ -18,6 +18,8 @@ namespace Domain.Posts
                 Rows = rows
             };
 
+            Comments.Hub commentHub = new Comments.Hub();
+
             using var db = new DB.DarkContext();
             pager.TotalRows = await db.Posts.CountAsync();
             pager.List = await db.Posts.AsNoTracking()
@@ -30,17 +32,8 @@ namespace Domain.Posts
                                            Id = p.Id,
                                            NickName = p.Creator,
                                            Content = p.Content,
-                                           Date = p.CreateDate.ToString("HH:mm"),
-                                           //Comments = p.Comments == null ? new List<Comments.Results.CommentItem>() : p.Comments.OrderByDescending(c => c.CreateDate)
-                                           //                     .Take(5)
-                                           //                     .Select(c => new Comments.Results.CommentItem
-                                           //                     {
-                                           //                         NickName = c.Creator,
-                                           //                         Content = c.Content,
-                                           //                         Date = c.CreateDate.ToString("HH:mm"),
-                                           //                         Images = Files.GetImagesPath(c.Images.SplitToInt(','))
-                                           //                     })
-                                           //                     .ToList(),
+                                           Date = p.CreateDate.ToStandardTimeString(),
+                                           Comments = commentHub.GetComments(p.Id, 1, 5),
                                            Images = Files.GetImagesPath(p.Images.SplitToInt(','))
                                        })
                                        .ToListAsync();

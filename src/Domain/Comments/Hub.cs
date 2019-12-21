@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Comments
@@ -20,19 +19,26 @@ namespace Domain.Comments
             using var db = new DB.DarkContext();
 
             pager.TotalRows = await db.Comments.CountAsync(c => c.PostId == postId);
-            pager.List = await db.Comments.AsNoTracking()
+            pager.List = GetComments(postId, index, rows);
+
+            return Resp.Success(pager);
+        }
+
+        internal List<Results.CommentItem> GetComments(int postId, int index, int rows)
+        {
+            using var db = new DB.DarkContext();
+            return db.Comments.AsNoTracking()
                                           .Where(c => c.PostId == postId)
-                                          .Skip(pager.GetSkip())
-                                          .Take(pager.Rows)
+                                          .Skip(rows * (index - 1))
+                                          .Take(rows)
                                           .Select(c => new Results.CommentItem
                                           {
                                               NickName = c.Creator,
                                               Content = c.Content,
-                                              Date = c.CreateDate.ToString("HH:mm"),
+                                              Date = c.CreateDate.ToStandardTimeString(),
                                               Images = Files.GetImagesPath(c.Images.SplitToInt(','))
                                           })
-                                          .ToListAsync();
-            return Resp.Success(pager);
+                                          .ToList();
         }
 
         public async Task<Resp> NewCommentsAsync(Models.NewCommentInfo info)
