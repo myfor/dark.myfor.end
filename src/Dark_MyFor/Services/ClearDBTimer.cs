@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Dark_MyFor.Services
 {
@@ -32,6 +33,8 @@ namespace Dark_MyFor.Services
 
                         //  clear DB
                         ClearAllData();
+                        //  clear files
+                        ClearAllFiles();
 
                         isCleared = true;
                     }
@@ -52,6 +55,13 @@ namespace Dark_MyFor.Services
             db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(db.Comments)}");
             db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(db.Posts)}");
             db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(db.Files)}");
+        }
+
+        private void ClearAllFiles()
+        {
+            Directory.Delete(Domain.File.SaveThumbnailPath, true);
+            Directory.Delete(Domain.File.SaveTempPath, true);
+            Directory.Delete(Domain.File.SavePath, true);
         }
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
