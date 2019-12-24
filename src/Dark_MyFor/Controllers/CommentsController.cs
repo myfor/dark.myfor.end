@@ -11,11 +11,14 @@ namespace Dark_MyFor.Controllers
     [Route("api/[controller]")]
     public class CommentsController : DarkBaseController
     {
+        /// <summary>
+        /// 获取帖子下的所有评论
+        /// </summary>
         [HttpGet]
-        public async Task<ActionResult> GetLiseAsync(int postId, int index, int rows)
+        public async Task<ActionResult> GetAllLiseAsync(int postId)
         {
             Hub hub = new Hub();
-            Resp r = await hub.GetLiseAsync(postId, index, rows);
+            Resp r = await hub.GetAllListAsync(postId);
             return Pack(r);
         }
 

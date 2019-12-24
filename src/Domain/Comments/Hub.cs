@@ -8,7 +8,7 @@ namespace Domain.Comments
 {
     public class Hub
     {
-        public async Task<Resp> GetLiseAsync(int postId, int index, int rows)
+        public async Task<Resp> GetListAsync(int postId, int index, int rows)
         {
             Paginator pager = new Paginator
             { 
@@ -22,6 +22,25 @@ namespace Domain.Comments
             pager.List = GetComments(postId, index, rows);
 
             return Resp.Success(pager);
+        }
+
+        /// <summary>
+        /// 获取所有评论
+        /// </summary>
+        public async Task<Resp> GetAllListAsync(int postId)
+        {
+            using var db = new DB.DarkContext();
+            List<Results.CommentItem> list = await db.Comments.AsNoTracking()
+                                        .Where(c => c.PostId == postId)
+                                        .Select(c => new Results.CommentItem
+                                        {
+                                            NickName = c.Creator,
+                                            Content = c.Content,
+                                            Date = c.CreateDate.ToStandardTimeString(),
+                                            Imgs = File.GetImagesPath(c.Images.SplitToInt(','))
+                                        })
+                                        .ToListAsync();
+            return Resp.Success(list);
         }
 
         internal List<Results.CommentItem> GetComments(int postId, int index, int rows)

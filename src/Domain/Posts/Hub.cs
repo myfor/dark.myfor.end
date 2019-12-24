@@ -24,7 +24,6 @@ namespace Domain.Posts
             pager.List = await db.Posts.AsNoTracking()
                                        .Skip(pager.GetSkip())
                                        .Take(pager.Rows)
-                                       .Include(p => p.Comments)
                                        .Include(p => p.Image)
                                        .OrderByDescending(p => p.CreateDate)
                                        .Select(p => new Results.PostItem
