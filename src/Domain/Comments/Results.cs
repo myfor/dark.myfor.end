@@ -9,7 +9,7 @@ namespace Domain.Comments
             public string NickName { get; set; }
             public string Content { get; set; }
             public string Date { get; set; }
-            public List<Share.Image> Images { get; set; }
+            public List<Share.Image> Imgs { get; set; }
         }
     }
 }

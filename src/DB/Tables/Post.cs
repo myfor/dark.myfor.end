@@ -8,7 +8,8 @@ namespace DB.Tables
         [Required]
         public string Content { get; set; } = "";
         [Required, StringLength(64)]
-        public string Images { get; set; } = "";
+        public int ImageId { get; set; } = 1;
+        public File Image { get; set; }
         public List<Comment> Comments { get; set; }
     }
 }

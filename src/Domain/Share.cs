@@ -39,7 +39,10 @@ namespace Domain
             /// 缩略图
             /// </summary>
             public string Thumbnail { get; set; }
-            public string Path { get; set; }
+            /// <summary>
+            /// 原图
+            /// </summary>
+            public string Source { get; set; }
         }
         #endregion
     }

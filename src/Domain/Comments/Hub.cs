@@ -36,7 +36,7 @@ namespace Domain.Comments
                                               NickName = c.Creator,
                                               Content = c.Content,
                                               Date = c.CreateDate.ToStandardTimeString(),
-                                              Images = File.GetImagesPath(c.Images.SplitToInt(','))
+                                              Imgs = File.GetImagesPath(c.Images.SplitToInt(','))
                                           })
                                           .ToList();
         }

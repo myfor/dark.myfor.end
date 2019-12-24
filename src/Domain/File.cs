@@ -161,7 +161,7 @@ namespace Domain
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        private static async Task<File> SaveImageAsync(IFormFile file)
+        public static async Task<File> SaveImageAsync(IFormFile file)
         {
             /*
              * 保存图片到数据库, 同时保存图片的缩略图
@@ -321,13 +321,13 @@ namespace Domain
             Share.Image image = new Share.Image
             { 
                 Thumbnail = "",
-                Path = ""
+                Source = ""
             };
 
             if (file is null)
                 return image;
             image.Thumbnail = file.Thumbnail;
-            image.Path = file.Path;
+            image.Source = file.Path;
             return image;
         }
     }

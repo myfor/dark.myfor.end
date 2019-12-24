@@ -25,6 +25,7 @@ namespace Domain.Posts
                                        .Skip(pager.GetSkip())
                                        .Take(pager.Rows)
                                        .Include(p => p.Comments)
+                                       .Include(p => p.Image)
                                        .OrderByDescending(p => p.CreateDate)
                                        .Select(p => new Results.PostItem
                                        {
@@ -33,7 +34,11 @@ namespace Domain.Posts
                                            Content = p.Content,
                                            Date = p.CreateDate.ToStandardTimeString(),
                                            Comments = commentHub.GetComments(p.Id, 1, 5),
-                                           Images = File.GetImagesPath(p.Images.SplitToInt(','))
+                                           Img = new Share.Image
+                                           {
+                                               Thumbnail = p.Image.Thumbnail,
+                                               Source = p.Image.Path
+                                           }
                                        })
                                        .ToListAsync();
             return Resp.Success(pager, "");
@@ -45,14 +50,14 @@ namespace Domain.Posts
             if (!isValid)
                 return Resp.Fault(Resp.NONE, msg);
 
-            List<File> files = await File.SaveImagesAsync(info.Images);
+            File files = await File.SaveImageAsync(info.Img);
 
             DB.Tables.Post newPost = new DB.Tables.Post
             {
                 CreateDate = DateTimeOffset.Now,
                 Creator = info.NickName,
                 Content = info.Content,
-                Images = string.Join(", ", files.Select(f => f.Id))
+                ImageId = files.Id
             };
             using var db = new DB.DarkContext();
             db.Posts.Add(newPost);

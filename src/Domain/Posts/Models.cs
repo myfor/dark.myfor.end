@@ -9,7 +9,7 @@ namespace Domain.Posts
         {
             public string NickName { get; set; }
             public string Content { get; set; }
-            public List<IFormFile> Images { get; set; }
+            public IFormFile Img { get; set; }
 
             public (bool, string) IsValid()
             {
