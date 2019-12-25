@@ -14,6 +14,10 @@ namespace Domain
     public class File
     {
         /// <summary>
+        /// 默认图片 ID
+        /// </summary>
+        public const int DEFAULT_IMG_ID = 1;
+        /// <summary>
         /// 没有文件, 使用 0 是因为方便存数据库
         /// </summary>
         public const int NOT_FILES = 0;
@@ -24,7 +28,7 @@ namespace Domain
         /// <summary>
         /// 缩略图最高
         /// </summary>
-        public const double THUMBNAIL_HEIGHT = 200;
+        public const double THUMBNAIL_HEIGHT = 150;
         /// <summary>
         /// GIF
         /// </summary>
@@ -126,13 +130,20 @@ namespace Domain
             ThumbnailPath = file.Thumbnail;
         }
 
-        public static async Task<List<File>> SaveImagesAsync(List<IFormFile> files)
+        /// <summary>
+        /// 保存图片
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="thumbnailWidth">缩略图宽</param>
+        /// <param name="thumbnailHeight">缩略图高</param>
+        /// <returns></returns>
+        public static async Task<List<File>> SaveImagesAsync(List<IFormFile> files, double thumbnailWidth = THUMBNAIL_WIDTH, double thumbnailHeight = THUMBNAIL_HEIGHT)
         {
             List<File> list = new List<File>(files?.Count() ?? 0);
 
             foreach (IFormFile file in files)
             {
-                var f = await SaveImageAsync(file);
+                var f = await SaveImageAsync(file, thumbnailWidth, thumbnailHeight);
                 if (f is null)
                     continue;
                 list.Add(f);
@@ -161,7 +172,7 @@ namespace Domain
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        public static async Task<File> SaveImageAsync(IFormFile file)
+        public static async Task<File> SaveImageAsync(IFormFile file, double thumbnailWidth = THUMBNAIL_WIDTH, double thumbnailHeight = THUMBNAIL_HEIGHT)
         {
             /*
              * 保存图片到数据库, 同时保存图片的缩略图
@@ -214,7 +225,7 @@ namespace Domain
                 thumbnailSourcePath = sourceSavePath;
 
             //  保存缩略图
-            Task thumbnailT = MakeThumbnail(thumbnailSourcePath, thumbnailPath);
+            Task thumbnailT = MakeThumbnail(thumbnailSourcePath, thumbnailPath, thumbnailWidth, thumbnailHeight);
 
             DB.Tables.File fileModel = new DB.Tables.File
             {

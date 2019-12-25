@@ -46,13 +46,17 @@ namespace Dark_MyFor
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMiddleware<Middleware.VisitLimit>();
-
             app.UseHttpsRedirection();
 
             app.UseRewriter(new RewriteOptions().AddRewrite("^$", "/index.html", true));
 
             app.UseStaticFiles();
+
+            if (!env.IsDevelopment())
+            {
+                app.UseMiddleware<Middleware.VisitLimit>();
+            }
+
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory() + "/files/"),

@@ -8,7 +8,7 @@ namespace DB
         public int Id { get; set; }
         [Required]
         public int State { get; set; } = 1;
-        [Required]
+        [Required, StringLength(64)]
         public string Creator { get; set; } = "";
         [Required]
         public DateTimeOffset CreateDate { get; set; } = DateTimeOffset.Now;

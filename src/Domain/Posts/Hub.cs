@@ -22,10 +22,10 @@ namespace Domain.Posts
             using var db = new DB.DarkContext();
             pager.TotalRows = await db.Posts.CountAsync();
             pager.List = await db.Posts.AsNoTracking()
+                                       .OrderByDescending(p => p.CreateDate)
                                        .Skip(pager.GetSkip())
                                        .Take(pager.Rows)
                                        .Include(p => p.Image)
-                                       .OrderByDescending(p => p.CreateDate)
                                        .Select(p => new Results.PostItem
                                        {
                                            Id = p.Id,
@@ -56,13 +56,13 @@ namespace Domain.Posts
                 CreateDate = DateTimeOffset.Now,
                 Creator = info.NickName,
                 Content = info.Content,
-                ImageId = files.Id
+                ImageId = files?.Id ?? File.DEFAULT_IMG_ID
             };
             using var db = new DB.DarkContext();
             db.Posts.Add(newPost);
             int suc = await db.SaveChangesAsync();
             if (suc == 1)
-                return Resp.Fault(Resp.NONE, "成功");
+                return Resp.Success(Resp.NONE, "成功");
             return Resp.Fault(Resp.NONE, "提交失败");
         }
     }

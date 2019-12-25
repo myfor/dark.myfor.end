@@ -66,7 +66,7 @@ namespace Domain.Comments
             if (!isValid)
                 return Resp.Fault(Resp.NONE, msg);
 
-            List<File> files = await File.SaveImagesAsync(info.Images);
+            List<File> files = await File.SaveImagesAsync(info.Images, 100, 100);
 
             DB.Tables.Comment newComment = new DB.Tables.Comment
             {
