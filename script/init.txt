@@ -1,6 +1,8 @@
 use dark_myfor;
 
 insert into files 
-(State, Creator, CreateDate, Name, ExtensionName, Size, Path, Thumbnail) 
+(id, State, Creator, CreateDate, Name, ExtensionName, Size, Path, Thumbnail) 
 values 
-(1, '', '2019-01-01', 'default.png', '.png', 40, '/files/default.png', '/files/default.png');
+(1, 1, '', '2019-01-01', 'default.png', '.png', 40, '/files/default.png', '/files/default.png');
+
+mysqldump -u root -p dark_myfor > F:/MyWebSite/dark.myfor.end/script/dark_myfor.sql
