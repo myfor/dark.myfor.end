@@ -52,10 +52,7 @@ namespace Dark_MyFor
 
             app.UseStaticFiles();
 
-            if (!env.IsDevelopment())
-            {
-                app.UseMiddleware<Middleware.VisitLimit>();
-            }
+            app.UseMiddleware<Middleware.VisitLimit>();
 
             app.UseStaticFiles(new StaticFileOptions
             {
