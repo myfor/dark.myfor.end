@@ -6,3 +6,5 @@ values
 (1, 1, '', '2019-01-01', 'default.png', '.png', 40, '/files/default.png', '/files/default.png');
 
 mysqldump -u root -p dark_myfor > F:/MyWebSite/dark.myfor.end/script/dark_myfor.sql
+
+docker run --name dark_myfor --link mariadb:mariadb -d -v /data/dark_myfor/appsettings.json:/app/appsettings.json -v /data/dark_myfor/files:/app/files -v /data/dark_myfor/wwwroot:/app/wwwroot -p 8080:8080 dark_myfor
