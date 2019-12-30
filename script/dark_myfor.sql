@@ -43,10 +43,10 @@ UNLOCK TABLES;
 -- Table structure for table `comments`
 --
 
-DROP TABLE IF EXISTS `comments`;
+DROP TABLE IF EXISTS `Comments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comments` (
+CREATE TABLE `Comments` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `State` int(11) NOT NULL,
   `Creator` varchar(64) CHARACTER SET utf8mb4 NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE `comments` (
   `Images` varchar(64) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `IX_Comments_PostId` (`PostId`),
-  CONSTRAINT `FK_Comments_Posts_PostId` FOREIGN KEY (`PostId`) REFERENCES `posts` (`Id`) ON DELETE CASCADE
+  CONSTRAINT `FK_Comments_Posts_PostId` FOREIGN KEY (`PostId`) REFERENCES `Posts` (`Id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -64,19 +64,19 @@ CREATE TABLE `comments` (
 -- Dumping data for table `comments`
 --
 
-LOCK TABLES `comments` WRITE;
+LOCK TABLES `Comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `files`
+-- Table structure for table `Files`
 --
 
-DROP TABLE IF EXISTS `files`;
+DROP TABLE IF EXISTS `Files`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `files` (
+CREATE TABLE `Files` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `State` int(11) NOT NULL,
   `Creator` varchar(64) CHARACTER SET utf8mb4 NOT NULL,
@@ -91,23 +91,23 @@ CREATE TABLE `files` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `files`
+-- Dumping data for table `Files`
 --
 
-LOCK TABLES `files` WRITE;
-/*!40000 ALTER TABLE `files` DISABLE KEYS */;
-INSERT INTO `files` VALUES (1,1,'','2019-01-01 00:00:00.000000','default.png','.png',40,'/files/default.png','/files/default.png');
-/*!40000 ALTER TABLE `files` ENABLE KEYS */;
+LOCK TABLES `Files` WRITE;
+/*!40000 ALTER TABLE `Files` DISABLE KEYS */;
+INSERT INTO `Files` VALUES (1,1,'','2019-01-01 00:00:00.000000','default.png','.png',40,'/files/default.png','/files/default.png');
+/*!40000 ALTER TABLE `Files` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `posts`
+-- Table structure for table `Posts`
 --
 
-DROP TABLE IF EXISTS `posts`;
+DROP TABLE IF EXISTS `Posts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `posts` (
+CREATE TABLE `Posts` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `State` int(11) NOT NULL,
   `Creator` varchar(64) CHARACTER SET utf8mb4 NOT NULL,
@@ -116,17 +116,17 @@ CREATE TABLE `posts` (
   `ImageId` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `IX_Posts_ImageId` (`ImageId`),
-  CONSTRAINT `FK_Posts_Files_ImageId` FOREIGN KEY (`ImageId`) REFERENCES `files` (`Id`) ON DELETE CASCADE
+  CONSTRAINT `FK_Posts_Files_ImageId` FOREIGN KEY (`ImageId`) REFERENCES `Files` (`Id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `posts`
+-- Dumping data for table `Posts`
 --
 
-LOCK TABLES `posts` WRITE;
-/*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-/*!40000 ALTER TABLE `posts` ENABLE KEYS */;
+LOCK TABLES `Posts` WRITE;
+/*!40000 ALTER TABLE `Posts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Posts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

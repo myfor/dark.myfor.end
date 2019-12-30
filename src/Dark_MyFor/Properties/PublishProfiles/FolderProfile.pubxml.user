@@ -6,6 +6,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
+<<<<<<< HEAD
     <_PublishTargetUrl>F:\MyWebSite\dark.myfor.end\src\Dark_MyFor\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+=======
+    <_PublishTargetUrl>D:\Projects\dark.myfor.end\src\Dark_MyFor\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+>>>>>>> 3d4579c1d73ce4b4bda6fa01916cbc4d2867de86
   </PropertyGroup>
 </Project>

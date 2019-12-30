@@ -52,7 +52,7 @@ namespace Dark_MyFor
 
             app.UseStaticFiles();
 
-            app.UseMiddleware<Middleware.VisitLimit>();
+            //app.UseMiddleware<Middleware.VisitLimit>();
 
             app.UseStaticFiles(new StaticFileOptions
             {
@@ -62,7 +62,7 @@ namespace Dark_MyFor
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
