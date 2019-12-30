@@ -52,9 +52,9 @@ namespace Dark_MyFor.Services
         private void ClearAllData()
         {
             using var db = new DB.DarkContext();
-            db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(db.Comments)}");
-            db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(db.Posts)}");
-            db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(db.Files)}");
+            db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(DB.DarkContext.Comments)}");
+            db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(DB.DarkContext.Posts)}");
+            db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(DB.DarkContext.Files)}");
         }
 
         private void ClearAllFiles()

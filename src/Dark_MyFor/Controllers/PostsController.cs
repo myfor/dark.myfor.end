@@ -1,9 +1,7 @@
 ﻿using Dark_MyFor.Share;
 using Domain;
 using Domain.Posts;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Dark_MyFor.Controllers
@@ -15,7 +13,10 @@ namespace Dark_MyFor.Controllers
         [HttpGet("test")]
         public ActionResult Test()
         {
-            return Ok("OK");
+            string s1 = $"DELETE FROM {nameof(DB.DarkContext.Comments)}";
+            string s2 = $"DELETE FROM {nameof(DB.DarkContext.Posts)}";
+            string s3 = $"DELETE FROM {nameof(DB.DarkContext.Files)}";
+            return Ok(s1 + s2 + s3);
         }
 #endif
 
