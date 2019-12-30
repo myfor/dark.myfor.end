@@ -5,5 +5,6 @@ WORKDIR /app
 EXPOSE 8080
 
 COPY . .
+RUN apt-get update -y && apt-get install -y libgdiplus && apt-get clean && ln -s /usr/lib/libgdiplus.so /usr/lib/gdiplus.dll
 
 ENTRYPOINT ["dotnet", "Dark_MyFor.dll"]

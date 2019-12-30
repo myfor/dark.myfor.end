@@ -24,7 +24,8 @@ namespace Dark_MyFor.Services
 
                 while (true)
                 {
-                    DateTimeOffset NOW = DateTimeOffset.Now;
+                    //  获取北京时间
+                    DateTimeOffset NOW = DateTimeOffset.Now.ToUniversalTime().AddHours(8);
 
                     if (NOW.Hour == 6 && NOW.Minute == 0)
                     {
