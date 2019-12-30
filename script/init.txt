@@ -7,8 +7,4 @@ values
 
 mysqldump -u root -p dark_myfor > F:/MyWebSite/dark.myfor.end/script/dark_myfor.sql
 
-<<<<<<< HEAD
 docker run --name dark_myfor -d -p 8080:8080 -v /data/dark_myfor/appsettings.json:/app/appsettings.json -v /data/dark_myfor/wwwroot:/app/wwwroot -v /data/dark_myfor/files:/app/files -v /data/dark_myfor/files/temp:/app/files/temp -v /data/dark_myfor/files/uploadfiles:/app/files/uploadfiles --link mariadb:mariadb dark_myfor
-=======
-docker run --name dark_myfor --link mariadb:mariadb -d -v /data/dark_myfor/appsettings.json:/app/appsettings.json -v /data/dark_myfor/files:/app/files -v /data/dark_myfor/wwwroot:/app/wwwroot -p 8080:8080 dark_myfor
->>>>>>> 3d4579c1d73ce4b4bda6fa01916cbc4d2867de86
