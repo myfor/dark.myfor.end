@@ -7,4 +7,6 @@ values
 
 mysqldump -u root -p dark_myfor > F:/MyWebSite/dark.myfor.end/script/dark_myfor.sql
 
+docker run --name nginx -d -p 80:80 -p 443:443 -v /data/nginx/html:/usr/share/nginx/html -v /data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/logs:/var/log/nginx -v /data/nginx/conf.d:/etc/nginx/conf.d -v /data/nginx/conf:/etc/nginx/conf -d nginx
+
 docker run --name dark_myfor -d -p 8080:8080 -v /data/dark_myfor/appsettings.json:/app/appsettings.json -v /data/dark_myfor/wwwroot:/app/wwwroot -v /data/dark_myfor/files:/app/files -v /data/dark_myfor/files/temp:/app/files/temp -v /data/dark_myfor/files/uploadfiles:/app/files/uploadfiles -v /data/dark_myfor/files/thumbnails:/app/files/thumbnails --link mariadb:mariadb dark_myfor
