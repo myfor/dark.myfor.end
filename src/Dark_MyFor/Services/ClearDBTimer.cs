@@ -55,7 +55,7 @@ namespace Dark_MyFor.Services
             using var db = new DB.DarkContext();
             db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(DB.DarkContext.Comments)}");
             db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(DB.DarkContext.Posts)}");
-            db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(DB.DarkContext.Files)}");
+            db.Database.ExecuteSqlRaw($"DELETE FROM {nameof(DB.DarkContext.Files)} where Id != 1");
         }
 
         private void ClearAllFiles()

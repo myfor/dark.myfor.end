@@ -1,6 +1,6 @@
 use dark_myfor;
 
-insert into files 
+insert into Files 
 (id, State, Creator, CreateDate, Name, ExtensionName, Size, Path, Thumbnail) 
 values 
 (1, 1, '', '2019-01-01', 'default.png', '.png', 40, '/files/default.png', '/files/default.png');
